@@ -1,9 +1,7 @@
 from fastapi import APIRouter
-from backend.api.endpoints import chatbot, media, schedule, analytics
 
 router = APIRouter()
 
-router.include_router(chatbot.router, prefix="/chatbot", tags=["Chatbot"])
-router.include_router(media.router, prefix="/media", tags=["Media"])
-router.include_router(schedule.router, prefix="/schedule", tags=["Schedule"])
-router.include_router(analytics.router, prefix="/analytics", tags=["Analytics"])
+@router.get("/ping")
+async def ping():
+    return {"message": "pong"}

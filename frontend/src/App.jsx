@@ -1,17 +1,16 @@
-import React from "react";
-import Dashboard from "./components/Dashboard.jsx";
-import CreatorView from "./components/CreatorView.jsx";
-import Chatbot from "./components/Chatbot.jsx";
+import React from 'react'
+import Sidebar from './components/Sidebar'
+import Dashboard from './components/Dashboard'
+import Chatbot from './components/Chatbot'
 
-function App() {
+export default function App() {
   return (
-    <div className="p-4 bg-gray-900 min-h-screen">
-      <h1 className="text-white text-3xl font-bold mb-4">EchoMediaAI Dashboard</h1>
-      <Dashboard />
-      <CreatorView />
-      <Chatbot />
+    <div className="flex min-h-screen bg-gray-900 text-white">
+      <Sidebar />
+      <main className="flex-1 p-6">
+        <Dashboard />
+        <Chatbot />
+      </main>
     </div>
-  );
+  )
 }
-
-export default App;

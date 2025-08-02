@@ -1,2 +1,3 @@
-# EchoMediaAI Dashboard
-Automated content poster and subscriber interaction portal.
+# JordiBot Automation
+
+This starter project includes browser automation for posting to OnlyFans and a model dashboard UI preview.
