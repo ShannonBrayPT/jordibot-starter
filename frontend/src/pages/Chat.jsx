@@ -28,14 +28,16 @@ export function Chat() {
       <h2 className="text-xl font-bold">Chat with JordiBot</h2>
       <div className="border p-4 rounded bg-gray-800 space-y-2 h-80 overflow-y-auto">
         {messages.map((m, i) => (
-          <div key={i} className={`text-sm ${m.role === "user" ? "text-right text-pink-400" : "text-left text-blue-400"}`}>
-            {m.content}
+          <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+            <div className={`max-w-xs px-3 py-2 rounded-lg text-sm ${m.role === "user" ? "bg-pink-600 text-white" : "bg-white text-black"}`}>
+              {m.content}
+            </div>
           </div>
         ))}
       </div>
       <div className="flex space-x-2">
         <input
-          className="text-black p-1 flex-1"
+          className="text-black p-1 flex-1 rounded"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask JordiBot anything..."
