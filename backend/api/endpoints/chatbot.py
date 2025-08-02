@@ -2,6 +2,6 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
-@router.post("/")
-async def handle_chat(input_text: str):
-    return {"response": f"Echoing back: {input_text}"}
+@router.post("/chat")
+async def chat(message: str):
+    return {"response": f"Echo: {message}"}

@@ -1,9 +1,7 @@
+/* Replace @tailwind directives with compiled Tailwind CSS if not using PostCSS */
+/*@import url('https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css'); */
+
 /* frontend/src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Optional: your custom styles */
-body {
-  @apply bg-gray-100 text-gray-900;
-}
