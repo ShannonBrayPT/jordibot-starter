@@ -1,5 +1,15 @@
 from fastapi import FastAPI
-from backend.api.routes import router as api_router
+from fastapi.middleware.cors import CORSMiddleware
+from .api.routes import router  # <== RELATIVE IMPORT
 
 app = FastAPI()
-app.include_router(api_router)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Adjust this as needed in prod
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(router)

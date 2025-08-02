@@ -1,10 +1,13 @@
-import React from 'react'
 
-export default function Dashboard() {
+import React from 'react';
+
+const Dashboard = () => {
   return (
-    <div className="bg-gray-800 p-4 rounded-lg shadow">
-      <h1 className="text-2xl font-bold">Dashboard Overview</h1>
-      <p className="mt-2 text-gray-300">Welcome to EchoMedia AI.</p>
+    <div className="min-h-screen bg-gray-900 text-white p-8">
+      <h1 className="text-4xl font-bold mb-4">EchoMediaAI Dashboard</h1>
+      <p>Welcome! More components coming soon.</p>
     </div>
-  )
-}
+  );
+};
+
+export default Dashboard;
