@@ -1,0 +1,129 @@
+To ensure your graphical interface (UI) for the JordiBot automation platform is production-grade, user-friendly, and polished—especially for a creator-centric tool—you’ll want the following UI requirements and design guidelines in place.
+
+✅ Functional Requirements
+1. Dashboard Layout
+Sidebar (Right or Configurable) with icons and labels:
+
+Home / Chat
+
+Upload Media
+
+Scheduler
+
+Analytics
+
+DM Templates
+
+Settings
+
+Top Navigation Bar with:
+
+Logo & Brand name
+
+Theme Toggle (Light/Dark)
+
+User Profile dropdown (with logout)
+
+2. Page Components
+Each page should be modular and routed with react-router-dom.
+
+🧠 Chat Interface
+Floating chat bubble or full panel
+
+Avatar icon + message threads
+
+Upload box for files
+
+Text input with auto-suggestions
+
+Role toggle (Model / Coach / Assistant)
+
+📤 Media Upload
+Drag & drop + browse buttons
+
+Preview thumbnails (image/video/audio)
+
+Metadata tagging (e.g., NSFW, Caption, Scene)
+
+Upload progress bar
+
+🗓️ Scheduler
+Calendar-style view (weekly/daily)
+
+Content preview in scheduled slots
+
+Add/Edit/Remove content modal
+
+Time zone setting
+
+📊 Analytics
+Use Chart.js or Recharts
+
+Show engagement: likes, subs, DMs, revenue
+
+Filters: daily, weekly, monthly
+
+Breakdown by post type
+
+📨 DM Templates
+Table of saved messages
+
+Edit, clone, delete options
+
+Insert variables ({{username}}, {{offer_link}})
+
+🎨 Branding & Design
+1. Theme
+Tailwind CSS with darkMode: 'class'
+
+Support for custom color palette
+
+Primary: #FF0066 (brand pink/red)
+
+Secondary: grayscale
+
+Accent: soft lavender or neon blue
+
+2. Typography
+Bold headings (e.g., text-2xl font-semibold)
+
+Readable body text (e.g., text-base leading-relaxed)
+
+Icons from lucide-react or Heroicons
+
+3. Logo Integration
+Top-left or center on mobile view
+
+PNG/SVG with responsive layout
+
+Favicon in public directory
+
+🔐 Role-Based Access
+Model: sees Chat, Upload, Scheduler
+
+Staff/Admin: sees all + analytics, settings
+
+Role toggle in local state or JWT-based logic
+
+🧩 Technical Requirements
+Frontend: React + Vite + Tailwind CSS
+
+Routing: react-router-dom
+
+UI Libraries: @shadcn/ui, lucide-react, framer-motion
+
+API Handling: Axios or Fetch
+
+Auth: Microsoft OAuth or Google Sign-In (integrated)
+
+🧪 Development Utilities
+vite.config.js with aliasing
+
+tailwind.config.js with extended colors/fonts
+
+postcss.config.js with only needed plugins
+
+Hot reload via npm run dev
+
+CI/CD integration for Azure Static Web Apps
+
