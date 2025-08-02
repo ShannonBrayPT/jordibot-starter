@@ -1,0 +1,10 @@
+app_location: "/frontend"
+output_location: "dist"
+app_artifact_location: "dist"
+api_location: null
+
+- name: Build frontend
+  run: |
+    cd frontend
+    npm install
+    npm run build
