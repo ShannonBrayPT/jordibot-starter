@@ -1,7 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, UploadFile, File
 
 router = APIRouter()
 
-@router.get("/")
-async def example():
-    return {"message": "This is the media endpoint"}
+@router.post("/upload")
+async def upload_file(file: UploadFile = File(...)):
+    return {"filename": file.filename}

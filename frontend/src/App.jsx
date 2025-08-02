@@ -1,16 +1,16 @@
-import React from 'react'
-import Sidebar from './components/Sidebar'
-import Dashboard from './components/Dashboard'
-import Chatbot from './components/Chatbot'
 
-export default function App() {
+import React from 'react'
+import Sidebar from './components/Sidebar.jsx'
+
+function App() {
   return (
-    <div className="flex min-h-screen bg-gray-900 text-white">
+    <div className="flex">
       <Sidebar />
-      <main className="flex-1 p-6">
-        <Dashboard />
-        <Chatbot />
-      </main>
+      <div className="p-4 w-full">
+        <h1 className="text-2xl font-bold">Welcome to JordiBot</h1>
+      </div>
     </div>
   )
 }
+
+export default App

@@ -1,13 +1,11 @@
 
 import React from 'react';
 
-const Dashboard = () => {
+export default function Dashboard() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
-      <h1 className="text-4xl font-bold mb-4">EchoMediaAI Dashboard</h1>
-      <p>Welcome! More components coming soon.</p>
+    <div className="p-4 bg-gray-800 rounded-lg shadow">
+      <h3 className="text-lg font-bold mb-2">Dashboard Component</h3>
+      <p>This is the dashboard view.</p>
     </div>
   );
-};
-
-export default Dashboard;
+}

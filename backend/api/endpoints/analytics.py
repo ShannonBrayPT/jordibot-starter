@@ -3,5 +3,5 @@ from fastapi import APIRouter
 router = APIRouter()
 
 @router.get("/")
-async def example():
-    return {"message": "This is the analytics endpoint"}
+async def get_analytics():
+    return {"data": "Sample analytics data"}

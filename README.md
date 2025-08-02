@@ -1,3 +1,3 @@
-# JordiBot Automation
+# JordiBot Full Project
 
-This starter project includes browser automation for posting to OnlyFans and a model dashboard UI preview.
+(Placeholder until generation completes.)
