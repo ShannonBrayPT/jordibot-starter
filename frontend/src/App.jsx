@@ -17,6 +17,7 @@ export default function App() {
           <Topbar />
           <main className="flex-1 overflow-y-auto p-4 md:p-6">
             <Routes>
+              <Route path="/" element={<Dashboard />} />
               <Route path="/inbox" element={<OnlyFansInbox />} />
               <Route path="/chatbot" element={<Dashboard />} />
               <Route path="/upload" element={<Upload />} />
