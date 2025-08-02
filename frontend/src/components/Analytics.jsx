@@ -1,11 +1,12 @@
-
 import React from 'react';
 
-export default function Analytics() {
+const Analytics = () => {
   return (
-    <div className="p-4 bg-gray-800 rounded-lg shadow">
-      <h3 className="text-lg font-bold mb-2">Analytics Component</h3>
-      <p>This is the analytics view.</p>
+    <div className="p-4 border rounded bg-white h-full">
+      <h2 className="text-xl font-bold mb-4">Analytics</h2>
+      <p>Views, clicks, subs, likes and model performance charts would be displayed here.</p>
     </div>
   );
-}
+};
+
+export default Analytics;
