@@ -1,0 +1,12 @@
+/* App.css — EchoMediaAI UI skin */
+.app-container {
+  @apply min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white;
+}
+
+.card {
+  @apply p-4 m-4 rounded-2xl shadow-md bg-gray-100 dark:bg-gray-800;
+}
+
+.title {
+  @apply text-2xl font-bold mb-4;
+}

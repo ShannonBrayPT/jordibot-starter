@@ -1,0 +1,1 @@
+console.log("Frontend app loaded and connected to backend.");

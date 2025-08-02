@@ -1,2 +1,5 @@
-playwright
+fastapi
+uvicorn
 python-dotenv
+requests
+playwright
