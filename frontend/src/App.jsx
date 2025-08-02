@@ -3,7 +3,6 @@ import ChatBot from "./components/ChatBot";
 import Upload from "./components/Upload";
 import Scheduler from "./components/Scheduler";
 import Analytics from "./components/Analytics";
-// src/App.jsx
 import React from 'react';
 import UploadForm from './components/Form';
 
@@ -19,16 +18,33 @@ import UploadForm from './components/Form';
 
 
 
+export default function App() {
+  const [activeTab, setActiveTab] = useState("upload");
 
+  const renderContent = () => {
+    switch (activeTab) {
+      case "upload":
+        return <UploadForm />;
+      case "chatbot":
+        return <Chatbot />;
+      case "scheduler":
+        return <Scheduler />;
+      case "analytics":
+        return <Analytics />;
+      default:
+        return <UploadForm />;
+    }
+  };
 
-function App() {
   return (
-    <div className="p-8 text-white bg-gray-900 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">JordiBot Upload Form</h1>
-      <UploadForm />
+    <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <main className="flex-1 p-4 overflow-y-auto">
+        {renderContent()}
+      </main>
     </div>
   );
 }
 
-export default App;
 
+export { App };  // ❌ not default
