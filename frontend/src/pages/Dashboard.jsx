@@ -1,110 +1,77 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 
 export default function Dashboard() {
-  const [messages, setMessages] = useState([
-    { role: "assistant", content: "Welcome to the JordiBot dashboard!" }
-  ]);
-  const [input, setInput] = useState("");
-  const [media, setMedia] = useState([]);
-  const [scheduledAt, setScheduledAt] = useState("");
-  const [postContent, setPostContent] = useState("");
+  const [subscriberMessages, setSubscriberMessages] = useState([]);
+  const [sentReplies, setSentReplies] = useState([]);
+  const [filterText, setFilterText] = useState("");
+  const [offset, setOffset] = useState(0);
+  const limit = 5;
 
-  const sendChat = async () => {
-    if (!input.trim()) return;
-    const userMsg = { role: "user", content: input };
-    setMessages((prev) => [...prev, userMsg]);
-    setInput("");
-    const res = await fetch("/api/openai", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: [...messages, userMsg] }),
-    });
-    const data = await res.json();
-    setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
-  };
+  useEffect(() => {
+    fetch("/api/dashboard/messages")
+      .then(res => res.json())
+      .then(data => setSubscriberMessages(data.messages || []));
+  }, []);
 
-  const uploadPreview = (e) => {
-    const files = Array.from(e.target.files);
-    setMedia(files);
-  };
+  useEffect(() => {
+    fetch("/api/dashboard/replies")
+      .then(res => res.json())
+      .then(data => setSentReplies(data.replies || []));
+  }, []);
 
-  const handlePost = async () => {
-    const formData = new FormData();
-    media.forEach((file) => formData.append("files", file));
-    formData.append("content", postContent);
-    formData.append("scheduled_at", scheduledAt);
-
-    const res = await fetch("/api/post", {
-      method: "POST",
-      body: formData,
-    });
-
-    const result = await res.json();
-    alert(result.status || "Posted!");
-  };
+  const filteredMessages = subscriberMessages.filter((msg) =>
+    msg.sender.toLowerCase().includes(filterText.toLowerCase())
+  );
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-white max-w-screen-xl mx-auto px-4 py-6">
-      {/* Chat Panel */}
-      <section className="bg-gray-800 p-4 rounded-lg h-[32rem] flex flex-col">
-        <h2 className="text-lg font-bold mb-2">💬 Chat with JordiBot</h2>
-        <div className="flex-1 space-y-1 overflow-y-auto mb-2 bg-black/10 p-2 rounded text-sm">
-          {messages.map((m, i) => (
-            <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-              <div className={`px-3 py-2 rounded-lg ${m.role === "user" ? "bg-pink-600" : "bg-white text-black"}`}>
-                {m.content}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="flex space-x-2">
-          <input
-            className="text-black p-2 flex-1 rounded"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Say something..."
-          />
-          <button onClick={sendChat} className="bg-pink-600 px-4 py-2 rounded">Send</button>
-        </div>
-      </section>
+    <div className="text-white max-w-screen-md mx-auto p-4 space-y-4">
+      <h2 className="text-2xl font-bold">📥 Dashboard: Subscriber Messages</h2>
+      <input
+        className="text-black w-full p-2 rounded"
+        placeholder="Filter by sender..."
+        value={filterText}
+        onChange={(e) => setFilterText(e.target.value)}
+      />
 
-      {/* Upload & Post Section */}
-      <section className="space-y-6">
-        {/* Upload Media */}
-        <div className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-lg font-bold mb-2">📤 Upload Media</h2>
-          <input type="file" multiple onChange={uploadPreview} className="mb-2" />
-          <ul className="text-sm list-disc pl-5">
-            {media.map((file, i) => (
-              <li key={i}>{file.name}</li>
-            ))}
-          </ul>
+      {filteredMessages.slice(offset, offset + limit).map((msg, i) => (
+        <div key={i} className="bg-gray-800 p-4 rounded-lg space-y-1">
+          <p className="text-pink-400 font-semibold">@{msg.sender}</p>
+          <p className="text-sm text-gray-100">{msg.message}</p>
+          <div className="text-xs text-gray-400">🕒 {new Date(msg.timestamp).toLocaleString()}</div>
         </div>
+      ))}
 
-        {/* Schedule Post */}
-        <div className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-lg font-bold mb-2">🗓 Schedule</h2>
-          <input
-            type="datetime-local"
-            className="text-black p-1 rounded"
-            value={scheduledAt}
-            onChange={(e) => setScheduledAt(e.target.value)}
-          />
-        </div>
+      <div className="flex justify-between text-sm mt-2">
+        <button
+          className="bg-gray-600 px-3 py-1 rounded disabled:opacity-50"
+          onClick={() => setOffset(Math.max(0, offset - limit))}
+          disabled={offset === 0}
+        >
+          Previous
+        </button>
+        <button
+          className="bg-gray-600 px-3 py-1 rounded disabled:opacity-50"
+          onClick={() => setOffset(offset + limit)}
+          disabled={offset + limit >= filteredMessages.length}
+        >
+          Next
+        </button>
+      </div>
 
-        {/* Compose Post */}
-        <div className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-lg font-bold mb-2">📝 Message</h2>
-          <textarea
-            rows="4"
-            className="w-full text-black p-2 rounded"
-            placeholder="Write your caption or message here..."
-            value={postContent}
-            onChange={(e) => setPostContent(e.target.value)}
-          />
-          <button className="bg-pink-600 px-4 py-2 mt-2 rounded" onClick={handlePost}>Submit Post</button>
-        </div>
-      </section>
+      <h3 className="text-xl font-bold mt-6">📤 Sent Replies</h3>
+      <div className="grid gap-4">
+        {sentReplies.map((r, i) => (
+          <div key={i} className="bg-gray-700 p-3 rounded">
+            <p className="text-sm text-blue-300">To: @{r.sender}</p>
+            <p className="text-sm text-gray-100">"{r.response}"</p>
+            {r.vision_tags && (
+              <p className="text-xs text-yellow-300 mt-1">🧠 Tags: {r.vision_tags}</p>
+            )}
+            <div className="text-xs text-gray-400">🕒 {new Date(r.timestamp).toLocaleString()}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

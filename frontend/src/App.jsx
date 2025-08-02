@@ -1,3 +1,4 @@
+import OnlyFansInbox from "@/pages/OnlyFansInbox";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
@@ -16,6 +17,7 @@ export default function App() {
           <Topbar />
           <main className="flex-1 overflow-y-auto p-4 md:p-6">
             <Routes>
+              <Route path="/inbox" element={<OnlyFansInbox />} />
               <Route path="/chatbot" element={<Dashboard />} />
               <Route path="/upload" element={<Upload />} />
               <Route path="/schedule" element={<Scheduler />} />

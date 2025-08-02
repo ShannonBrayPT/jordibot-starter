@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 const items = [
+  { name: "Inbox", path: "/inbox" },
   { name: "Chatbot", path: "/chatbot" },
   { name: "Upload", path: "/upload" },
   { name: "Schedule", path: "/schedule" },

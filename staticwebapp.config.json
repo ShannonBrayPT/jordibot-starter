@@ -1,0 +1,35 @@
+{
+  "routes": [
+    {
+      "route": "/api/*",
+      "rewrite": "/api/main.py"
+    }
+  ],
+  "auth": {
+    "identityProviders": {
+      "customOpenIdConnectProviders": {
+        "azuread_b2c": {
+          "registration": {
+            "clientIdSettingName": "AZURE_CLIENT_ID",
+            "clientCredential": {
+              "clientSecretSettingName": "AZURE_CLIENT_SECRET"
+            },
+            "openIdConnectConfiguration": {
+              "wellKnownOpenIdConfigurationUri": "https://<your-tenant-name>.b2clogin.com/<your-tenant-name>.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1_signupsignin"
+            }
+          },
+          "login": {
+            "loginBehavior": "redirect",
+            "redirectUri": "/"
+          }
+        }
+      }
+    }
+  },
+  "responseOverrides": {
+    "401": {
+      "redirect": "/login",
+      "statusCode": 302
+    }
+  }
+}

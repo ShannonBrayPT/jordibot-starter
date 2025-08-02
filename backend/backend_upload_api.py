@@ -2,7 +2,6 @@
 from dotenv import load_dotenv
 import openai
 import base64
-import os
 
 load_dotenv()
 ENABLE_VISION_TAGGING = os.getenv("ENABLE_VISION_TAGGING", "false").lower() == "true"
